@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 screenBounds;
     [SerializeField] private float speed = 15f;
     [SerializeField] private Touch touch;
+    private float speedModifier;
 
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        speedModifier = 0.08f;
         
         objectSizes = gameObject.transform.localScale;
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
@@ -44,13 +46,15 @@ public class PlayerMovement : MonoBehaviour
             if (Input.touchCount > 0)
             {
                 // get the first one
-                Touch firstTouch = Input.GetTouch(0);
+                Touch touch = Input.GetTouch(0);
 
-                if (firstTouch.phase == TouchPhase.Moved)
+                if (touch.phase == TouchPhase.Moved)
                 {
-                    Vector3 touchPosition = Camera.main.ScreenToWorldPoint(firstTouch.position);
-                    touchPosition.z = 0;
-                    transform.position = Vector2.MoveTowards(transform.position, touchPosition, speed * Time.deltaTime);
+                    transform.position = new Vector3(transform.position.x + (touch.deltaPosition.x * speedModifier * Time.deltaTime), transform.position.y + (touch.deltaPosition.y * speedModifier * Time.deltaTime), transform.position.z);
+
+                    //Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+                    //touchPosition.z = 0;
+                    //transform.position = Vector2.MoveTowards(transform.position, touchPosition, speed * Time.deltaTime);
                     Timer -= Time.deltaTime;
                     if (Timer <= 0f)
                     {
