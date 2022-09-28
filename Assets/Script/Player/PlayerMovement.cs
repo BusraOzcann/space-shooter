@@ -5,17 +5,19 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Vector3 startPos;
+    private bool isMoving = false;
     public GameObject laser;
     public GameObject laserpos_left;
     public GameObject laserpos_right;
-    public float Timer = 0;
+    public float Timer = -1.0f;
 
     [Header("Movement")]
     [SerializeField] private Vector3 objectSizes;
     [SerializeField] private Vector2 screenBounds;
-    [SerializeField] private float speed = 15f;
+     private Vector3 posOffset = new Vector3(0, 0.5f, 0);
     [SerializeField] private Touch touch;
-    private float speedModifier;
+    private float speed = 2f;
+    private float speedModifier = 0.065f;
 
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
@@ -23,8 +25,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        speedModifier = 0.08f;
-        
+
         objectSizes = gameObject.transform.localScale;
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         startPos = Vector3.zero;
@@ -37,6 +38,16 @@ public class PlayerMovement : MonoBehaviour
     {
         playerScreenBoundaries();
 
+        if (isMoving)
+        {
+            Timer -= Time.deltaTime;
+            if (Timer <= 0f)
+            {
+                Fire();
+                Timer = 0.4f;
+            }
+        }
+
         transform.Translate(new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0));
 
         if (Input.touchCount > 0)
@@ -45,24 +56,19 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.touchCount > 0)
             {
-                // get the first one
                 Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Moved){
+                    //transform.position = new Vector3(transform.position.x + (touch.deltaPosition.x * speedModifier * Time.deltaTime), transform.position.y + (touch.deltaPosition.y * speedModifier * Time.deltaTime), transform.position.z);
+                    Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+                    touchPosition.z = 0;
+                    transform.position = Vector2.MoveTowards(transform.position, touchPosition + posOffset, speed * Time.deltaTime);
 
-                if (touch.phase == TouchPhase.Moved)
-                {
-                    transform.position = new Vector3(transform.position.x + (touch.deltaPosition.x * speedModifier * Time.deltaTime), transform.position.y + (touch.deltaPosition.y * speedModifier * Time.deltaTime), transform.position.z);
-
-                    //Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-                    //touchPosition.z = 0;
-                    //transform.position = Vector2.MoveTowards(transform.position, touchPosition, speed * Time.deltaTime);
-                    Timer -= Time.deltaTime;
-                    if (Timer <= 0f)
-                    {
-                        Instantiate(laser, laserpos_left.transform.position, Quaternion.identity);
-                        Instantiate(laser, laserpos_right.transform.position, Quaternion.identity);
-                        Timer = 0.4f;
-                    }
-                    
+                }
+                else if(touch.phase == TouchPhase.Began){
+                    isMoving = true;
+                }
+                else if(touch.phase == TouchPhase.Ended){
+                    isMoving = false;
                 }
             }
         }
@@ -86,5 +92,10 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = (new Vector3((screenBounds.x * -1) + objectSizes.x / 2, transform.position.y, transform.position.z));
         }
+    }
+    private void Fire()
+    {
+        Instantiate(laser, laserpos_left.transform.position, Quaternion.identity);
+        Instantiate(laser, laserpos_right.transform.position, Quaternion.identity);
     }
 }

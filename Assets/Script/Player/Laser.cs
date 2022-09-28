@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    public float speed = 4f;
+    private float speed = 8f;
 
     Vector3 screenBounds;
     void Start()
@@ -21,7 +21,7 @@ public class Laser : MonoBehaviour
     {
         transform.position += new Vector3(0, speed * Time.deltaTime, 0);
         
-        if(transform.position.y >= (screenBounds.y * 2) + 2f)
+        if(transform.position.y >= screenBounds.y + 2f)
         {
             Destroy(gameObject);
         }
