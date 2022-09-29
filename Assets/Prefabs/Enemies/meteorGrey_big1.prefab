@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6759013266374766643}
   - component: {fileID: 1027788744667640155}
   - component: {fileID: 2742505336370252623}
+  - component: {fileID: 4035939666290130017}
   m_Layer: 0
   m_Name: meteorGrey_big1
-  m_TagString: Untagged
+  m_TagString: BigMeteor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,4 +133,16 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &4035939666290130017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759013266374766642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b5c7d280add8f499859e4afb44a759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
