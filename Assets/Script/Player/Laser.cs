@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    private float speed = 8f;
+    public float damage = 20f;
 
-    Vector3 screenBounds;
+    public float speed = 8f;
+
     void Start()
     {
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+
     }
 
     void Update()
@@ -19,11 +20,16 @@ public class Laser : MonoBehaviour
 
     private void Move()
     {
-        transform.position += new Vector3(0, speed * Time.deltaTime, 0);
-        
-        if(transform.position.y >= screenBounds.y + 2f)
+        if(GameManager.Instance.state == GameState.Play) transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+
+        if (transform.position.y >= GameManager.Instance.screenBounds.y + 2f || transform.position.y <= (GameManager.Instance.screenBounds.y * -1) - 2f)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision);
     }
 }

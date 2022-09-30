@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float Health;
+    public float scorePoint;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

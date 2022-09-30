@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 screenBounds;
      private Vector3 posOffset = new Vector3(0, 0.5f, 0);
     [SerializeField] private Touch touch;
-    private float speed = 10f;
+    private float speed = 5f;
     private float speedModifier = 0.065f;
 
     [Header("Components")]
@@ -59,18 +59,20 @@ public class PlayerMovement : MonoBehaviour
                 if (Input.touchCount > 0)
                 {
                     Touch touch = Input.GetTouch(0);
-                    if (touch.phase == TouchPhase.Moved)
+                    Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+
+                    if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Stationary)
+                    {
+                        isMoving = true;
+                        transform.position = Vector2.MoveTowards(transform.position, touchPosition + posOffset, speed * Time.deltaTime);
+                    }
+                    else if (touch.phase == TouchPhase.Moved)
                     {
                         //transform.position = new Vector3(transform.position.x + (touch.deltaPosition.x * speedModifier * Time.deltaTime), transform.position.y + (touch.deltaPosition.y * speedModifier * Time.deltaTime), transform.position.z);
-                        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
                         touchPosition.z = 0;
                         //transform.position = Vector2.MoveTowards(transform.position, touchPosition + posOffset, speed * Time.deltaTime);
                         transform.position = touchPosition + posOffset;
 
-                    }
-                    else if (touch.phase == TouchPhase.Began)
-                    {
-                        isMoving = true;
                     }
                     else if (touch.phase == TouchPhase.Ended)
                     {

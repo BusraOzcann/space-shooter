@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2979728759984089151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: weapon_right_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9017687972893025748}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: weapon_right_behind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7849006989240941605}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: weapon_left_behind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5775008063715205001}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: weapon_left_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 7088336562342385624}
   - component: {fileID: 2039203957197263901}
   - component: {fileID: 5319070955513497459}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: enemy-senior
   m_TagString: SeniorEnemyShip
   m_Icon: {fileID: 0}
@@ -288,3 +288,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64235883943f345479adb54e01febf27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 40
+  scorePoint: 5
+  laserPos:
+  - {fileID: 4122096550647203399}
+  - {fileID: 5038662239330846936}
+  - {fileID: 3956493093367184396}
+  - {fileID: 813216286832270622}
+  laser: {fileID: 2833101604487049789, guid: edf91ffcfe23a9748902a337fe4663b9, type: 3}
+  detechDistance: 8
+  speed: 0
+  fireTempTime: 0.5

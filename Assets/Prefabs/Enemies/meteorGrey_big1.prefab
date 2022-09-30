@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 1027788744667640155}
   - component: {fileID: 2742505336370252623}
   - component: {fileID: 4035939666290130017}
-  m_Layer: 0
+  - component: {fileID: 5328545144786223304}
+  m_Layer: 7
   m_Name: meteorGrey_big1
   m_TagString: BigMeteor
   m_Icon: {fileID: 0}
@@ -147,3 +148,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
+--- !u!114 &5328545144786223304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6759013266374766642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e93bdc4fe80fcc49bf4e4cdc38694f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 80
+  scorePoint: 3

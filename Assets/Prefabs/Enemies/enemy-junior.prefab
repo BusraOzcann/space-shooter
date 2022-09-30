@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 362855094933765003}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: weapon_right_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2319447859245960825}
   - component: {fileID: 2335943998063190999}
   - component: {fileID: 5136842697638699518}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: enemy-junior
   m_TagString: JuniorEnemyShip
   m_Icon: {fileID: 0}
@@ -193,6 +193,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64235883943f345479adb54e01febf27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 20
+  scorePoint: 2
+  laserPos:
+  - {fileID: 6839154575701643093}
+  - {fileID: 3616656247733943750}
+  laser: {fileID: 2833101604487049789, guid: edf91ffcfe23a9748902a337fe4663b9, type: 3}
+  detechDistance: 5
+  speed: 0
+  fireTempTime: 0.8
 --- !u!1 &6839154575701643093
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7568589469323635295}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: weapon_left_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,9 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public GameState state;
     public static GameManager Instance { get; private set; }
-    public List<GameObject> objectPool;
+    public Vector2 screenBounds;
+    public int playerSkore;
 
-    public static event Action<GameState> OnGameStateChanged;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -26,21 +26,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Camera.main.orthographicSize = 5f; //Her zaman 5 olmalý cunku resim konumlandýrmalarý hierarchy'den 5'e gore ayarlandý. Deðiþilirse background startPos y ekseni deðiþmeli.
-        objectPool = new List<GameObject>();
-        UpdateGameState(GameState.StopGame);
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+
+        UpdateGameState(GameState.WaitingPanel);
     }
 
 
-
-    void Update()
-    {
-        
-    }
 
     public void UpdateGameState(GameState newState)
     {
         state = newState;
-        OnGameStateChanged?.Invoke(newState);
     }
 
 }
