@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 3637997719705822200}
   - component: {fileID: 2319447859245960825}
   - component: {fileID: 2335943998063190999}
+  - component: {fileID: 5136842697638699518}
   m_Layer: 0
   m_Name: enemy-junior
   m_TagString: JuniorEnemyShip
@@ -132,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0286d0421ea73424abb2b0b82b609434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2
 --- !u!50 &2319447859245960825
 Rigidbody2D:
   serializedVersion: 4
@@ -180,6 +181,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.84, y: 0.81}
   m_EdgeRadius: 0
+--- !u!114 &5136842697638699518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5018737452572935183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64235883943f345479adb54e01febf27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6839154575701643093
 GameObject:
   m_ObjectHideFlags: 0

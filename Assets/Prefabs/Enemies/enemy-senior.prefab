@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 4324295643674551939}
   - component: {fileID: 7088336562342385624}
   - component: {fileID: 2039203957197263901}
+  - component: {fileID: 5319070955513497459}
   m_Layer: 0
   m_Name: enemy-senior
   m_TagString: SeniorEnemyShip
@@ -274,4 +275,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0286d0421ea73424abb2b0b82b609434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
+--- !u!114 &5319070955513497459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414418166412275982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64235883943f345479adb54e01febf27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

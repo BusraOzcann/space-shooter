@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector2 screenBounds;
      private Vector3 posOffset = new Vector3(0, 0.5f, 0);
     [SerializeField] private Touch touch;
-    private float speed = 2f;
+    private float speed = 10f;
     private float speedModifier = 0.065f;
 
     [Header("Components")]
@@ -36,39 +36,46 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        playerScreenBoundaries();
-
-        if (isMoving)
+        if(GameManager.Instance.state == GameState.Play)
         {
-            Timer -= Time.deltaTime;
-            if (Timer <= 0f)
+            playerScreenBoundaries();
+
+            if (isMoving)
             {
-                Fire();
-                Timer = 0.4f;
+                Timer -= Time.deltaTime;
+                if (Timer <= 0f)
+                {
+                    Fire();
+                    Timer = 0.4f;
+                }
             }
-        }
 
-        transform.Translate(new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0));
-
-        if (Input.touchCount > 0)
-        {
-            touch = Input.GetTouch(0);
+            transform.Translate(new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0));
 
             if (Input.touchCount > 0)
             {
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Moved){
-                    //transform.position = new Vector3(transform.position.x + (touch.deltaPosition.x * speedModifier * Time.deltaTime), transform.position.y + (touch.deltaPosition.y * speedModifier * Time.deltaTime), transform.position.z);
-                    Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-                    touchPosition.z = 0;
-                    transform.position = Vector2.MoveTowards(transform.position, touchPosition + posOffset, speed * Time.deltaTime);
+                touch = Input.GetTouch(0);
 
-                }
-                else if(touch.phase == TouchPhase.Began){
-                    isMoving = true;
-                }
-                else if(touch.phase == TouchPhase.Ended){
-                    isMoving = false;
+                if (Input.touchCount > 0)
+                {
+                    Touch touch = Input.GetTouch(0);
+                    if (touch.phase == TouchPhase.Moved)
+                    {
+                        //transform.position = new Vector3(transform.position.x + (touch.deltaPosition.x * speedModifier * Time.deltaTime), transform.position.y + (touch.deltaPosition.y * speedModifier * Time.deltaTime), transform.position.z);
+                        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+                        touchPosition.z = 0;
+                        //transform.position = Vector2.MoveTowards(transform.position, touchPosition + posOffset, speed * Time.deltaTime);
+                        transform.position = touchPosition + posOffset;
+
+                    }
+                    else if (touch.phase == TouchPhase.Began)
+                    {
+                        isMoving = true;
+                    }
+                    else if (touch.phase == TouchPhase.Ended)
+                    {
+                        isMoving = false;
+                    }
                 }
             }
         }

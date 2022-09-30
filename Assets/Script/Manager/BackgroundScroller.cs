@@ -28,12 +28,15 @@ public class BackgroundScroller : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(0, -1 * speed * Time.deltaTime, 0);
-        if(transform.position.y <= 0 - (Camera.main.orthographicSize * 2f)) // Aþagý dogru hareket oldugu için -- ve resmin yuksekligi Camera.main.orthographicSize * 2f 'e eþit oldugu için
+        if(GameManager.Instance.state == GameState.Play)
         {
-            Vector3 position = transform.position;
-            position.y = newY_pos;
-            transform.position = position;
+            transform.position += new Vector3(0, -1 * speed * Time.deltaTime, 0);
+            if (transform.position.y <= 0 - (Camera.main.orthographicSize * 2f)) // Aþagý dogru hareket oldugu için -- ve resmin yuksekligi Camera.main.orthographicSize * 2f 'e eþit oldugu için
+            {
+                Vector3 position = transform.position;
+                position.y = newY_pos;
+                transform.position = position;
+            }
         }
     }
 
