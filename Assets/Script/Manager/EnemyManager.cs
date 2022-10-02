@@ -4,111 +4,83 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    private bool GameStarted = false;
-
-    private float yPosCounter;
     public float enemyDistance;
-    public float previousXPos;
+    public GameObject createdPrefab;
+    public int createdPrefabCounter;
+    [HideInInspector] public float enemyRespawnTime;
+    [HideInInspector] public float tempRespawnTime;
 
     [Header("Enemy Prefabs")]
-    public GameObject juniorEnemy;
-    public GameObject midEnemy;
-    public GameObject seniorEnemy;
+    public List<GameObject> Juniors;
+    public List<GameObject> Mids;
+    public List<GameObject> Seniors;
 
-    [Header("Rock Prefabs")]
-    public List<GameObject> bigMeteor;
-    public GameObject mediumMeteor;
-    public List<GameObject> smallMeteor;
+    [Header("Enemy Prefab Changes")]
+    public float juniorChange;
+    public float midsChange;
+    public float seniorChange;
 
-    public List<GameObject> enemyPool;
-    public int juniorEnemyCount;
-    public int midEnemyCount;
-    public int seniorEnemyCount;
-    public int bigRockCount;
-    public int midRockCount;
-    public int smallRockCount;
-
-
-    void Start()
+    private void Start()
     {
-        enemyPool = new List<GameObject>();
-
-        //Enemy position
-        enemyDistance = 2f;
-        yPosCounter = 1;
-        previousXPos = 0;
+        enemyRespawnTime = 1.5f;
+        tempRespawnTime = enemyRespawnTime;
     }
 
     void Update()
     {
-        if (GameManager.Instance.state == GameState.Play && GameStarted == false)
+        if(GameManager.Instance.state == GameState.Play)
         {
-            InsertEnemiesToList();
-            GameStarted = true;
+            if (enemyRespawnTime <= 0)
+            {
+                CreateEnemie();
+                enemyRespawnTime = tempRespawnTime;
+            }
+            enemyRespawnTime -= Time.deltaTime;
         }
+        
     }
 
-    public void InsertEnemiesToList()
+    public void ChangeRespawnTime( float val)
     {
-        for (int i = 0; i < juniorEnemyCount; i++) enemyPool.Add(juniorEnemy);
-        for (int i = 0; i < midEnemyCount; i++) enemyPool.Add(midEnemy);
-        for (int i = 0; i < seniorEnemyCount; i++) enemyPool.Add(seniorEnemy);
-        for (int i = 0; i < bigRockCount; i++) enemyPool.Add(randomBigMeteor());
-        for (int i = 0; i < midRockCount; i++) enemyPool.Add(midEnemy);
-        for (int i = 0; i < smallRockCount; i++) enemyPool.Add(randomSmallMeteor());
-
-        RandomizeList();
+        tempRespawnTime = val;
     }
 
-    GameObject randomBigMeteor() {
-        int random = bigMeteor.Count;
-        return bigMeteor[Random.Range(0, random)];
-    }
-    GameObject randomSmallMeteor() {
-        int random = smallMeteor.Count;
-        return smallMeteor[Random.Range(0, random)];
-    }
-
-    public void RandomizeList()
+    public void CreateEnemie()
     {
+        GameObject prefab = GetRandomPrefab();
+        float xPos = RandomXPos(prefab);
+        float yPos = CalcYPos();
+        createdPrefab = Instantiate(prefab);
+        createdPrefab.transform.position = new Vector3(xPos, yPos, 0);
+    }
 
-        int n = enemyPool.Count;
-        while (n > 1)
+    private GameObject GetRandomPrefab()
+    {
+        if(GameManager.Instance.playerScore < 20){
+            return Juniors[Random.Range(0, Juniors.Count)];
+        }
+        else if (GameManager.Instance.playerScore < 40)
         {
-            n--;
-            int k = Random.Range(0, n + 1);
-            GameObject value = enemyPool[k];
-            enemyPool[k] = enemyPool[n];
-            enemyPool[n] = value;
+            return Mids[Random.Range(0, Mids.Count)];
         }
-        CreateEnemies();
+        return Seniors[Random.Range(0, Seniors.Count)];
     }
 
-    public void CreateEnemies()
+    private float RandomXPos(GameObject prefab)
     {
-        for (int i = 0; i < enemyPool.Count; i++)
+        float x = Random.Range(GameManager.Instance.screenBounds.x - prefab.transform.localScale.x/2, (GameManager.Instance.screenBounds.x * -1) + prefab.transform.localScale.x / 2);
+        if(createdPrefab != null)
         {
-            Vector3 createPos = InstancePosition(i);
-            Instantiate(enemyPool[i], createPos, Quaternion.identity);
+            if(Mathf.Abs(createdPrefab.transform.position.x - x) < 2f)
+            {
+                return RandomXPos(prefab);
+            }
         }
-
-        InsertEnemiesToList();
+        return x;
     }
 
-    private Vector3 InstancePosition(int index)
+    private float CalcYPos()
     {
-        float xPos = Random.Range(GameManager.Instance.screenBounds.x, GameManager.Instance.screenBounds.x * -1);
-        if (previousXPos - xPos <= 1.5f) {
-            InstancePosition(index);
-        }
-        else
-        {
-            yPosCounter++;
-        }
-            //previousXPos = index == 0 ? enemyPool[0].transform.position.x : enemyPool[index - 1].transform.position.x;
-        float yPos = GameManager.Instance.screenBounds.y + (yPosCounter * enemyDistance);
-        return new Vector3(xPos, yPos);
-
+        return GameManager.Instance.screenBounds.y + enemyDistance;
     }
-
 }

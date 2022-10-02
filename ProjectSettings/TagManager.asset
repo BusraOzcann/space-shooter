@@ -19,9 +19,9 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
-  - 
-  - 
+  - Enemy
+  - EnemyLaser
+  - PlayerLaser
   - 
   - 
   - 

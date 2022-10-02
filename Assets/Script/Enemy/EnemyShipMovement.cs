@@ -8,6 +8,6 @@ public class EnemyShipMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(0, speed * Time.deltaTime * -1, 0);
+        if(GameManager.Instance.state == GameState.Play) transform.position += new Vector3(0, speed * Time.deltaTime * -1, 0);
     }
 }

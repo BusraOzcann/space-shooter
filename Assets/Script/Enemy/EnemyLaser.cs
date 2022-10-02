@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class EnemyLaser : MonoBehaviour
 {
     public Sprite hitSprite;
     public float damage = 20f;
@@ -16,12 +16,12 @@ public class Laser : MonoBehaviour
 
     void Update()
     {
-        Move();
+        if (GameManager.Instance.state == GameState.Play) Move();
     }
 
     private void Move()
     {
-        if(GameManager.Instance.state == GameState.Play) transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+        transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
 
         if (transform.position.y >= GameManager.Instance.screenBounds.y || transform.position.y <= (GameManager.Instance.screenBounds.y * -1))
         {
@@ -32,14 +32,10 @@ public class Laser : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = hitSprite;
-        StartCoroutine(Remove());
+        if (collision.gameObject.GetComponent<Player>())
+        {
+            speed = 0;
+            collision.gameObject.GetComponent<Player>().health -= damage;
+        }
     }
-
-    IEnumerator Remove()
-    {
-        speed = 0;
-        yield return new WaitForSeconds(0.25f);
-        Destroy(gameObject);
-    }
-
 }

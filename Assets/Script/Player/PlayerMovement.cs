@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
      private Vector3 posOffset = new Vector3(0, 0.5f, 0);
     [SerializeField] private Touch touch;
     private float speed = 5f;
-    private float speedModifier = 0.065f;
 
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
@@ -28,9 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
         objectSizes = gameObject.transform.localScale;
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        startPos = Vector3.zero;
-        startPos.y = 0 - (screenBounds.y / 1.5f);
-        transform.position = startPos;
+        StartPos();
     }
 
 
@@ -82,7 +79,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
+    public void StartPos()
+    {
+        startPos = Vector3.zero;
+        startPos.y = 0 - (screenBounds.y / 1.5f);
+        transform.position = startPos;
+    }
     private void playerScreenBoundaries()
     {
         if (transform.position.y >= screenBounds.y - objectSizes.y / 2)

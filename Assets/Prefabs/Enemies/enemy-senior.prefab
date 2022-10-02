@@ -289,13 +289,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 40
+  collisionDamage: 95
   scorePoint: 5
   laserPos:
   - {fileID: 4122096550647203399}
   - {fileID: 5038662239330846936}
   - {fileID: 3956493093367184396}
   - {fileID: 813216286832270622}
+  Player: {fileID: 0}
   laser: {fileID: 2833101604487049789, guid: edf91ffcfe23a9748902a337fe4663b9, type: 3}
-  detechDistance: 8
-  speed: 0
-  fireTempTime: 0.5
+  detechDistance: 4
+  speed: 9
+  fireTempTime: 0.8

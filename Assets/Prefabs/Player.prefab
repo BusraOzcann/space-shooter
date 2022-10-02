@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7001101367137822631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: laserpos_left
   m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4326747269758557622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.46, y: -0.086, z: 0}
+  m_LocalPosition: {x: -0.46, y: -0.084, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,8 @@ GameObject:
   - component: {fileID: 742620564}
   - component: {fileID: 742620560}
   - component: {fileID: 742620563}
-  m_Layer: 0
+  - component: {fileID: 1109918857}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -109,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: -1370588347
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 326d389bd9927be45931d8bc4be83a62, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0cb2074dab7d1f24c9635dd10691b229, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -158,7 +159,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.99, y: 0.75}
+    oldSize: {x: 1.12, y: 0.75}
     newSize: {x: 0.99, y: 0.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -182,10 +183,24 @@ MonoBehaviour:
   laser: {fileID: 2100857735841673804, guid: 984f48231e212024a9566ff490d52751, type: 3}
   laserpos_left: {fileID: 4326747269758557622}
   laserpos_right: {fileID: 8766251181612854702}
+  Timer: -1
   objectSizes: {x: 0, y: 0, z: 0}
   screenBounds: {x: 0, y: 0}
-  speed: 3
   rb: {fileID: 0}
+--- !u!114 &1109918857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522716352059720550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9efb48d93585f1a4aa7936cca97afa58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  collisionDamage: 100
 --- !u!1 &8766251181612854702
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,10 +210,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3254871538038282038}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: laserpos_right
   m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -210,7 +225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8766251181612854702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.435, y: -0.086, z: 0}
+  m_LocalPosition: {x: 0.46, y: -0.084, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

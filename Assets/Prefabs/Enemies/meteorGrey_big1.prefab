@@ -162,3 +162,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 80
   scorePoint: 3
+  collisionDamage: 80
