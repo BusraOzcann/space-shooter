@@ -61,8 +61,8 @@ Transform:
   m_GameObject: {fileID: 5018737452572935183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.8018502, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7568589469323635295}
   - {fileID: 362855094933765003}
@@ -201,8 +201,8 @@ MonoBehaviour:
   - {fileID: 3616656247733943750}
   Player: {fileID: 0}
   laser: {fileID: 2833101604487049789, guid: edf91ffcfe23a9748902a337fe4663b9, type: 3}
-  detechDistance: 3.5
-  speed: 5
+  detechDistance: 4
+  speed: 6
   fireTempTime: 1.2
 --- !u!1 &6839154575701643093
 GameObject:

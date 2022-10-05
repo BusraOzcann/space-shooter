@@ -17,6 +17,10 @@ public class EnemyLaser : MonoBehaviour
     void Update()
     {
         if (GameManager.Instance.state == GameState.Play) Move();
+        if(GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.WaitingPanel)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Move()
@@ -34,8 +38,15 @@ public class EnemyLaser : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sprite = hitSprite;
         if (collision.gameObject.GetComponent<Player>())
         {
-            speed = 0;
             collision.gameObject.GetComponent<Player>().health -= damage;
+            StartCoroutine(Remove());
         }
+    }
+
+    IEnumerator Remove()
+    {
+        speed = 0;
+        yield return new WaitForSeconds(0.25f);
+        Destroy(gameObject);
     }
 }

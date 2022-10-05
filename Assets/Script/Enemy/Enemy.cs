@@ -59,12 +59,18 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        if (GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.WaitingPanel)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     void CheckXPos()
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(playerPos.x, transform.position.y), speed * Time.deltaTime);
-        if (transform.position.x - playerPos.x <= 0.1f || transform.position.x - playerPos.x >= 0.1f) {
+        if (Mathf.Abs(transform.position.x - playerPos.x) <= 0.1f) {
             fireTimer = fireTempTime;
             fire = false;
             Fire();

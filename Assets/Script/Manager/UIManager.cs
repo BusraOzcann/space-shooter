@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
     public GameObject scorePanel;
     public TMP_Text scoreTxt;
     public TMP_Text playerHealthTxt;
+    public TMP_Text playerScoreText;
+    public TMP_Text playerHighestScoreText;
+
     private void Start()
     {
         if (UIInstance != null && UIInstance != this)
@@ -72,6 +75,18 @@ public class UIManager : MonoBehaviour
         in_gamePanel.SetActive(false);
         stoppedGamePanel.SetActive(false);
         scorePanel.SetActive(true);
+        if (!PlayerPrefs.HasKey("Score"))
+        {
+            PlayerPrefs.SetInt("Score", GameManager.Instance.playerScore);
+            playerScoreText.text += GameManager.Instance.playerScore.ToString();
+            playerHighestScoreText.text += GameManager.Instance.playerScore.ToString();
+        }
+        else
+        {
+            if(PlayerPrefs.GetInt("Score") > GameManager.Instance.playerScore) playerHighestScoreText.text += PlayerPrefs.GetInt("Score").ToString();
+            else playerHighestScoreText.text = "EN YÜKSEK SKOR : " + GameManager.Instance.playerScore.ToString();
+            playerScoreText.text = "SKOR : " + GameManager.Instance.playerScore.ToString();
+        }
     }
 
     public void UpdateScoreText(string val)

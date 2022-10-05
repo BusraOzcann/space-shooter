@@ -10,7 +10,7 @@ public class BackgroundScroller : MonoBehaviour
 
     void Start()
     {
-        newY_pos = (Camera.main.orthographicSize * 2f) + Camera.main.orthographicSize -0.2f;
+        newY_pos = Camera.main.orthographicSize * 3f;
         transform.position = startPosition;
         sprite = gameObject.GetComponent<SpriteRenderer>();
         tempScale = transform.localScale;
@@ -26,7 +26,7 @@ public class BackgroundScroller : MonoBehaviour
         transform.localScale = tempScale;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(GameManager.Instance.state == GameState.Play)
         {
@@ -34,7 +34,7 @@ public class BackgroundScroller : MonoBehaviour
             if (transform.position.y <= 0 - (Camera.main.orthographicSize * 2f)) // Aþagý dogru hareket oldugu için -- ve resmin yuksekligi Camera.main.orthographicSize * 2f 'e eþit oldugu için
             {
                 Vector3 position = transform.position;
-                position.y = newY_pos;
+                position.y = newY_pos - (speed * Time.deltaTime);
                 transform.position = position;
             }
         }

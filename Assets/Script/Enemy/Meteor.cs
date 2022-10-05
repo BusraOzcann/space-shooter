@@ -29,6 +29,12 @@ public class Meteor : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        if (GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.WaitingPanel)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

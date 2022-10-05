@@ -33,10 +33,14 @@ public class EnemyManager : MonoBehaviour
             if (enemyRespawnTime <= 0)
             {
                 CreateEnemie();
+                if (GameManager.Instance.playerScore > 30) tempRespawnTime = 1.25f;
+                else if (GameManager.Instance.playerScore > 70) tempRespawnTime = 1f;
                 enemyRespawnTime = tempRespawnTime;
             }
             enemyRespawnTime -= Time.deltaTime;
         }
+
+        
         
     }
 
@@ -68,10 +72,10 @@ public class EnemyManager : MonoBehaviour
 
     private float RandomXPos(GameObject prefab)
     {
-        float x = Random.Range(GameManager.Instance.screenBounds.x - prefab.transform.localScale.x/2, (GameManager.Instance.screenBounds.x * -1) + prefab.transform.localScale.x / 2);
+        float x = Random.Range(GameManager.Instance.screenBounds.x - prefab.transform.localScale.x / 2, (GameManager.Instance.screenBounds.x * -1) + prefab.transform.localScale.x / 2);
         if(createdPrefab != null)
         {
-            if(Mathf.Abs(createdPrefab.transform.position.x - x) < 2f)
+            if (Mathf.Abs(createdPrefab.transform.position.x - x) < 1.5f)
             {
                 return RandomXPos(prefab);
             }

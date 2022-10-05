@@ -78,6 +78,12 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+        if (GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.WaitingPanel)
+        {
+            StartPos();
+        }
+
     }
     public void StartPos()
     {

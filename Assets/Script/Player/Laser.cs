@@ -16,14 +16,19 @@ public class Laser : MonoBehaviour
 
     void Update()
     {
-        Move();
+        if(GameManager.Instance.state == GameState.Play) Move();
+
+        if (GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.Score || GameManager.Instance.state == GameState.WaitingPanel)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Move()
     {
         if(GameManager.Instance.state == GameState.Play) transform.position += new Vector3(0, speed * Time.deltaTime, 0);
 
-        if (transform.position.y >= GameManager.Instance.screenBounds.y || transform.position.y <= (GameManager.Instance.screenBounds.y * -1))
+        if (transform.position.y >= GameManager.Instance.screenBounds.y - 1.5f || transform.position.y <= (GameManager.Instance.screenBounds.y * -1) - 1.5f)
         {
             Destroy(gameObject);
         }
